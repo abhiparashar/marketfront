@@ -24,7 +24,7 @@ router.get('/getdata',async(req,res)=>{
         }
   )
   .then((response) => {
-       let data = response.data;
+       let data = response.data.organizations;
        res.send(
            data
        )
