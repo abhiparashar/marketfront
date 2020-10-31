@@ -4,7 +4,10 @@ dotenv.config()
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const connectDB = require('./config/db')
+
 const authRoute = require('./routes/auth')
+const userRoute = require('./routes/auth')
+
 
 const app = express()
 
@@ -16,6 +19,8 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/api/v1/auth',authRoute)
+app.use('/api/v1/auth',userRoute)
+
 
 const port = process.env.PORT || 7500
 
