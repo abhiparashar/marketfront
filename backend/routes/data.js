@@ -2,24 +2,16 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 
-const{requireSign,isAuth,isAdmin} = require('../controllers/auth')
-const{userById} = require('../controllers/user')
-
-// router.get('/secret/:userId',requireSign,isAuth,isAdmin,(req,res)=>{
-//     res.status(200).send({
-//         user:req.body
-//     })
-// })
-
-router.param("userId",userById)
+const org_id = process.env.ORGANIZATION_ID
+const authorization = process.env.AUTHORIZATION
 
 router.get('/getdata',async(req,res)=>{
         axios.get(
-    'https://books.zoho.com/api/v3/organizations?organization_id=10234695',
+    `https://books.zoho.com/api/v3/organizations?organization_id=${org_id}`,
     {headers: {
             "Access-Control-Allow-Origin" : "*",
             "Content-type": "Application/json",
-            "Authorization":  'db36e02a50b57e081efe533a8a0f834b'
+            "Authorization":  `${authorization}`
             }   
         }
   )
