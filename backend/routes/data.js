@@ -6,7 +6,8 @@ const org_id = process.env.ORGANIZATION_ID
 const authorization = process.env.AUTHORIZATION
 
 router.get('/getdata',async(req,res)=>{
-        axios.get(
+  try {
+      const response = await axios.get(
     `https://books.zoho.com/api/v3/organizations?organization_id=${org_id}`,
     {headers: {
             "Access-Control-Allow-Origin" : "*",
@@ -15,17 +16,13 @@ router.get('/getdata',async(req,res)=>{
             }   
         }
   )
-  .then((response) => {
-       let data = response.data.organizations;
-       res.send(
-           data
-       )
-    },
-    (error) => {
-      var status = error.response.status
-      res.send(error)
+  if(response){
+  let data = response.data.organizations;
+      res.send(data)
     }
-  );
+  } catch (error) {
+    res.status(500).send('Something went wrong!')
+  }   
 })
 
 module.exports = router
