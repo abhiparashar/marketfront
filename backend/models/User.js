@@ -28,16 +28,7 @@ const userSchema = new mongoose.Schema({
     role:{
         type:Number
     }
-},{
-    toJSON: {
-      transform(doc, ret) {
-        ret.id = ret._id;
-        delete ret._id;
-        delete ret.password;
-        delete ret.__v;
-      },
-    },
-  })
+})
 
 //Encrypt the password 
 userSchema.pre('save',async function(){
